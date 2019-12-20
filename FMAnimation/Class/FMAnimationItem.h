@@ -6,7 +6,8 @@
 //  Copyright © 2019 郑桂华. All rights reserved.
 //
 
-#import "FMBaseAnimation.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "FMAnimationConstant.h"
 #import "FMAnimationDelegate.h"
 #import "FMAnimationItemProtocol.h"
@@ -14,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 extern void FMAnimationVerify(CGFloat original, void(^handle)(void));
-
+static CGFloat const FMAnimationDefault = 0.000001;
 @class FMAnimation;
 @interface FMAnimationItem : NSObject<FMAnimationItemProtocol>
 

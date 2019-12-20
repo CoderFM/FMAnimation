@@ -85,7 +85,6 @@ extern void FMAnimationVerify(CGFloat original, void(^handle)(void)){
     
 }
 
-
 // protocol
 // frame
 - (FMAnimationFrameItem * _Nonnull (^)(CGFloat))addX{
