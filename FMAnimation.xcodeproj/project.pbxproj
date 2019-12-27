@@ -17,12 +17,15 @@
 		C336611923ACB308000D9E5C /* FMAnimationFrameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610423ACB308000D9E5C /* FMAnimationFrameItem.m */; };
 		C336611A23ACB308000D9E5C /* FMAnimationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610923ACB308000D9E5C /* FMAnimationDelegate.m */; };
 		C336611B23ACB308000D9E5C /* FMAnimationOtherItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610A23ACB308000D9E5C /* FMAnimationOtherItem.m */; };
-		C336611C23ACB308000D9E5C /* FMAnimationShadowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610B23ACB308000D9E5C /* FMAnimationShadowModel.m */; };
-		C336611D23ACB308000D9E5C /* FMAnimationBorderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610C23ACB308000D9E5C /* FMAnimationBorderModel.m */; };
+		C336611C23ACB308000D9E5C /* FMAnimationShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610B23ACB308000D9E5C /* FMAnimationShadow.m */; };
+		C336611D23ACB308000D9E5C /* FMAnimationBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610C23ACB308000D9E5C /* FMAnimationBorder.m */; };
 		C336611E23ACB308000D9E5C /* FMAnimationTransformItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610E23ACB308000D9E5C /* FMAnimationTransformItem.m */; };
 		C336611F23ACB308000D9E5C /* FMAnimationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C336610F23ACB308000D9E5C /* FMAnimationItem.m */; };
 		C336612023ACB308000D9E5C /* UIView+FMAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C336611423ACB308000D9E5C /* UIView+FMAnimation.m */; };
 		C336612123ACB308000D9E5C /* FMAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C336611523ACB308000D9E5C /* FMAnimation.m */; };
+		C3415E0823B0ECA800CABD0A /* FMAnimationCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C3415E0723B0ECA800CABD0A /* FMAnimationCenterItem.m */; };
+		C3E13B0923B3401C001793FE /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C3E13B0823B3401C001793FE /* timg.jpeg */; };
+		C3E13B0C23B3420B001793FE /* FMAnimationTransform3DItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E13B0B23B3420B001793FE /* FMAnimationTransform3DItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +48,8 @@
 		C336610823ACB308000D9E5C /* UIView+FMAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FMAnimation.h"; sourceTree = "<group>"; };
 		C336610923ACB308000D9E5C /* FMAnimationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationDelegate.m; sourceTree = "<group>"; };
 		C336610A23ACB308000D9E5C /* FMAnimationOtherItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationOtherItem.m; sourceTree = "<group>"; };
-		C336610B23ACB308000D9E5C /* FMAnimationShadowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationShadowModel.m; sourceTree = "<group>"; };
-		C336610C23ACB308000D9E5C /* FMAnimationBorderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationBorderModel.m; sourceTree = "<group>"; };
+		C336610B23ACB308000D9E5C /* FMAnimationShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationShadow.m; sourceTree = "<group>"; };
+		C336610C23ACB308000D9E5C /* FMAnimationBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationBorder.m; sourceTree = "<group>"; };
 		C336610D23ACB308000D9E5C /* FMAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMAnimation.h; sourceTree = "<group>"; };
 		C336610E23ACB308000D9E5C /* FMAnimationTransformItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationTransformItem.m; sourceTree = "<group>"; };
 		C336610F23ACB308000D9E5C /* FMAnimationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimationItem.m; sourceTree = "<group>"; };
@@ -56,9 +59,14 @@
 		C336611323ACB308000D9E5C /* FMAnimationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMAnimationDelegate.h; sourceTree = "<group>"; };
 		C336611423ACB308000D9E5C /* UIView+FMAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FMAnimation.m"; sourceTree = "<group>"; };
 		C336611523ACB308000D9E5C /* FMAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMAnimation.m; sourceTree = "<group>"; };
-		C336611623ACB308000D9E5C /* FMAnimationBorderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMAnimationBorderModel.h; sourceTree = "<group>"; };
+		C336611623ACB308000D9E5C /* FMAnimationBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMAnimationBorder.h; sourceTree = "<group>"; };
 		C336611723ACB308000D9E5C /* FMAnimationItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMAnimationItemProtocol.h; sourceTree = "<group>"; };
-		C336611823ACB308000D9E5C /* FMAnimationShadowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMAnimationShadowModel.h; sourceTree = "<group>"; };
+		C336611823ACB308000D9E5C /* FMAnimationShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMAnimationShadow.h; sourceTree = "<group>"; };
+		C3415E0623B0ECA800CABD0A /* FMAnimationCenterItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMAnimationCenterItem.h; sourceTree = "<group>"; };
+		C3415E0723B0ECA800CABD0A /* FMAnimationCenterItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMAnimationCenterItem.m; sourceTree = "<group>"; };
+		C3E13B0823B3401C001793FE /* timg.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = timg.jpeg; sourceTree = "<group>"; };
+		C3E13B0A23B3420B001793FE /* FMAnimationTransform3DItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMAnimationTransform3DItem.h; sourceTree = "<group>"; };
+		C3E13B0B23B3420B001793FE /* FMAnimationTransform3DItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMAnimationTransform3DItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,7 @@
 				C33660EE23ACB2C9000D9E5C /* SceneDelegate.m */,
 				C33660F023ACB2C9000D9E5C /* ViewController.h */,
 				C33660F123ACB2C9000D9E5C /* ViewController.m */,
+				C3E13B0823B3401C001793FE /* timg.jpeg */,
 				C33660F323ACB2C9000D9E5C /* Main.storyboard */,
 				C33660F623ACB2C9000D9E5C /* Assets.xcassets */,
 				C33660F823ACB2C9000D9E5C /* LaunchScreen.storyboard */,
@@ -121,14 +130,18 @@
 				C336610F23ACB308000D9E5C /* FMAnimationItem.m */,
 				C336611123ACB308000D9E5C /* FMAnimationFrameItem.h */,
 				C336610423ACB308000D9E5C /* FMAnimationFrameItem.m */,
+				C3415E0623B0ECA800CABD0A /* FMAnimationCenterItem.h */,
+				C3415E0723B0ECA800CABD0A /* FMAnimationCenterItem.m */,
 				C336610623ACB308000D9E5C /* FMAnimationTransformItem.h */,
 				C336610E23ACB308000D9E5C /* FMAnimationTransformItem.m */,
+				C3E13B0A23B3420B001793FE /* FMAnimationTransform3DItem.h */,
+				C3E13B0B23B3420B001793FE /* FMAnimationTransform3DItem.m */,
 				C336611223ACB308000D9E5C /* FMAnimationOtherItem.h */,
 				C336610A23ACB308000D9E5C /* FMAnimationOtherItem.m */,
-				C336611823ACB308000D9E5C /* FMAnimationShadowModel.h */,
-				C336610B23ACB308000D9E5C /* FMAnimationShadowModel.m */,
-				C336611623ACB308000D9E5C /* FMAnimationBorderModel.h */,
-				C336610C23ACB308000D9E5C /* FMAnimationBorderModel.m */,
+				C336611823ACB308000D9E5C /* FMAnimationShadow.h */,
+				C336610B23ACB308000D9E5C /* FMAnimationShadow.m */,
+				C336611623ACB308000D9E5C /* FMAnimationBorder.h */,
+				C336610C23ACB308000D9E5C /* FMAnimationBorder.m */,
 				C336611323ACB308000D9E5C /* FMAnimationDelegate.h */,
 				C336610923ACB308000D9E5C /* FMAnimationDelegate.m */,
 			);
@@ -194,6 +207,7 @@
 			files = (
 				C33660FA23ACB2C9000D9E5C /* LaunchScreen.storyboard in Resources */,
 				C33660F723ACB2C9000D9E5C /* Assets.xcassets in Resources */,
+				C3E13B0923B3401C001793FE /* timg.jpeg in Resources */,
 				C33660F523ACB2C9000D9E5C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,11 +225,13 @@
 				C33660EC23ACB2C9000D9E5C /* AppDelegate.m in Sources */,
 				C336611E23ACB308000D9E5C /* FMAnimationTransformItem.m in Sources */,
 				C336611B23ACB308000D9E5C /* FMAnimationOtherItem.m in Sources */,
+				C3E13B0C23B3420B001793FE /* FMAnimationTransform3DItem.m in Sources */,
+				C3415E0823B0ECA800CABD0A /* FMAnimationCenterItem.m in Sources */,
 				C33660FD23ACB2C9000D9E5C /* main.m in Sources */,
 				C336612023ACB308000D9E5C /* UIView+FMAnimation.m in Sources */,
-				C336611C23ACB308000D9E5C /* FMAnimationShadowModel.m in Sources */,
+				C336611C23ACB308000D9E5C /* FMAnimationShadow.m in Sources */,
 				C336611F23ACB308000D9E5C /* FMAnimationItem.m in Sources */,
-				C336611D23ACB308000D9E5C /* FMAnimationBorderModel.m in Sources */,
+				C336611D23ACB308000D9E5C /* FMAnimationBorder.m in Sources */,
 				C336611A23ACB308000D9E5C /* FMAnimationDelegate.m in Sources */,
 				C33660EF23ACB2C9000D9E5C /* SceneDelegate.m in Sources */,
 			);
@@ -358,6 +374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T82JQ7P486;
 				INFOPLIST_FILE = FMAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -374,6 +391,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T82JQ7P486;
 				INFOPLIST_FILE = FMAnimation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -7,8 +7,8 @@
 //
 
 #import "FMAnimationItem.h"
-#import "FMAnimationShadowModel.h"
-#import "FMAnimationBorderModel.h"
+#import "FMAnimationShadow.h"
+#import "FMAnimationBorder.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FMAnimationOtherItem : FMAnimationItem
@@ -17,9 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 圆角
 @property(nonatomic, assign)CGFloat layerCornerRadius;
 // 阴影
-@property(nonatomic, strong)FMAnimationShadowModel *layerShadow;
+@property(nonatomic, strong)FMAnimationShadow *layerShadow;
 // 边框
-@property(nonatomic, strong)FMAnimationBorderModel *layerBorder;
+@property(nonatomic, strong)FMAnimationBorder *layerBorder;
 // 透明度
 @property(nonatomic, assign)CGFloat viewOpaque;
 /*

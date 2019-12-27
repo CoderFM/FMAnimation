@@ -26,10 +26,15 @@ extern void FMAnimationVerify(CGFloat original, void(^handle)(void)){
 {
     self = [super init];
     if (self) {
-        self.aniDelay = 0;
-        self.aniDuration = 1;
+        self.aniDelay = FMAnimationDefaultDelay;
+        self.aniDuration = FMAnimationDefaultDuration;
     }
     return self;
+}
+
+- (void)caculateWithBaseValue:(NSValue *)baseValue{
+    NSString *text = [NSString stringWithFormat:@"%@来实现- (void)caculateWithBaseValue", NSStringFromClass([self class])];
+    @throw [NSException exceptionWithName:@"需要子类实现该方法" reason:text userInfo:nil];
 }
 
 - (void (^)(void))start{
@@ -39,50 +44,25 @@ extern void FMAnimationVerify(CGFloat original, void(^handle)(void)){
     };
 }
 
+- (FMAnimationItem *(^)(NSTimeInterval))duration{
+    WeakSelf;
+    return ^(NSTimeInterval interval){
+        weakSelf.aniDuration = interval;
+        return weakSelf;
+    };
+}
+
+- (FMAnimationItem *(^)(NSTimeInterval))delay{
+    WeakSelf;
+    return ^(NSTimeInterval interval){
+        weakSelf.aniDelay = interval;
+        return weakSelf;
+    };
+}
+
 - (void)startAnimation{
-    [UIView animateWithDuration:0.25 // 动画的持续时间
-                          delay:0 // 动画执行的延迟时间
-                        options:0 // 执行的动画选项，
-                     animations:^{ // 要执行的动画代码
-        
-    } completion:^(BOOL finished) { // 动画执行完毕后的调用
-        
-    }];
-}
-
-- (void)startSpringAniamtion{
-    [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-- (void)startKeyFrameAnimation{
-    [UIView animateKeyframesWithDuration:0 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
-        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0 animations:^{
-            
-        }];
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-
-
-- (void)transitionAnimation
-{
-//    [UIView transitionWithView:_redView duration:1.0 options:UIViewAnimationOptionTransitionCurlUp animations:^{
-//        _redView.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
-//    } completion:nil];
-}
-
-- (void)animation:(void(^)(void))animation complete:(void(^)(BOOL finished))complete{
-    [UIView animateWithDuration:self.aniDuration delay:self.aniDelay options:UIViewAnimationOptionCurveLinear animations:animation completion:complete];
-}
-
-- (void)startAniamtion{
-    
+    NSString *text = [NSString stringWithFormat:@"%@来实现- (void)startAnimation", NSStringFromClass([self class])];
+    @throw [NSException exceptionWithName:@"需要子类实现该方法" reason:text userInfo:nil];
 }
 
 // protocol
@@ -150,11 +130,11 @@ extern void FMAnimationVerify(CGFloat original, void(^handle)(void)){
     return self.next.cornerRadius;
 }
 
-- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationShadowModel * _Nonnull))shadow{
+- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationShadow * _Nonnull))shadow{
     return self.next.shadow;
 }
 
-- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationBorderModel * _Nonnull))border{
+- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationBorder * _Nonnull))border{
     return self.next.border;
 }
 
@@ -162,5 +142,45 @@ extern void FMAnimationVerify(CGFloat original, void(^handle)(void)){
     return self.next.opaque;
 }
 
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveX{
+    return self.next.moveX;
+}
+
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveY{
+    return self.next.moveY;
+}
+
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveToX{
+    return self.next.moveToX;
+}
+
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveToY{
+    return self.next.moveToY;
+}
+
+// tranform3D
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat, CGFloat, CGFloat, CGFloat))rotate3D{
+    return self.next.rotate3D;
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))rotate3DX{
+    return self.next.rotate3DX;
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))rotate3DY{
+    return self.next.rotate3DY;
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))rotate3DZ{
+    return self.next.rotate3DZ;
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))scale3DX{
+    return self.next.scale3DX;
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))scale3DY{
+    return self.next.scale3DY;
+}
 
 @end

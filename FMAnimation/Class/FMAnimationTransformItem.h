@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)BOOL isAdd;
 
-@property(nonatomic, assign)CGFloat translateX;
-@property(nonatomic, assign)CGFloat translateY;
-@property(nonatomic, assign)CGFloat scaleX;
-@property(nonatomic, assign)CGFloat scaleY;
-@property(nonatomic, assign)CGFloat rotation;
+@property(nonatomic, assign)CGFloat _translateX;
+@property(nonatomic, assign)CGFloat _translateY;
+@property(nonatomic, assign)CGFloat _scaleX;
+@property(nonatomic, assign)CGFloat _scaleY;
+@property(nonatomic, assign)CGFloat _rotation;
 
 @property(nonatomic, assign)CGAffineTransform endTransform;
 

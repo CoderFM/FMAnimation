@@ -15,16 +15,16 @@
 {
     self = [super init];
     if (self) {
-        self.translateX = FMAnimationDefault;
-        self.translateY = FMAnimationDefault;
-        self.scaleX = FMAnimationDefault;
-        self.scaleY = FMAnimationDefault;
-        self.rotation = FMAnimationDefault;
+        self._translateX = FMAnimationDefault;
+        self._translateY = FMAnimationDefault;
+        self._scaleX = FMAnimationDefault;
+        self._scaleY = FMAnimationDefault;
+        self._rotation = FMAnimationDefault;
     }
     return self;
 }
 
-- (void)startAniamtion{
+- (void)startAnimation{
     [self caculateWithBaseValue:[NSValue valueWithCGAffineTransform:self.next.baseTransform]];
     self.next.baseTransform = self.endTransform;
     [UIView animateWithDuration:self.aniDuration delay:self.aniDelay options:UIViewAnimationOptionCurveLinear animations:^{
@@ -38,36 +38,36 @@
     CGAffineTransform baseTransform = [baseValue CGAffineTransformValue];
     __block CGAffineTransform endTransform;
     if (self.isAdd) {
-        FMAnimationVerify(self.translateX, ^{
-            endTransform = CGAffineTransformTranslate(baseTransform, self.translateX, 0);
+        FMAnimationVerify(self._translateX, ^{
+            endTransform = CGAffineTransformTranslate(baseTransform, self._translateX, 0);
         });
-        FMAnimationVerify(self.translateY, ^{
-            endTransform = CGAffineTransformTranslate(baseTransform, 0, self.translateY);
+        FMAnimationVerify(self._translateY, ^{
+            endTransform = CGAffineTransformTranslate(baseTransform, 0, self._translateY);
         });
-        FMAnimationVerify(self.scaleX, ^{
-            endTransform = CGAffineTransformScale(baseTransform, self.scaleX, 1);
+        FMAnimationVerify(self._scaleX, ^{
+            endTransform = CGAffineTransformScale(baseTransform, self._scaleX, 1);
         });
-        FMAnimationVerify(self.scaleY, ^{
-            endTransform = CGAffineTransformScale(baseTransform, 1, self.scaleY);
+        FMAnimationVerify(self._scaleY, ^{
+            endTransform = CGAffineTransformScale(baseTransform, 1, self._scaleY);
         });
-        FMAnimationVerify(self.rotation, ^{
-            endTransform = CGAffineTransformRotate(baseTransform, self.rotation);
+        FMAnimationVerify(self._rotation, ^{
+            endTransform = CGAffineTransformRotate(baseTransform, self._rotation);
         });
     } else {
-        FMAnimationVerify(self.translateX, ^{
-            endTransform = CGAffineTransformMake(baseTransform.a, baseTransform.b, baseTransform.c, baseTransform.d, self.translateX, baseTransform.ty);
+        FMAnimationVerify(self._translateX, ^{
+            endTransform = CGAffineTransformMake(baseTransform.a, baseTransform.b, baseTransform.c, baseTransform.d, self._translateX, baseTransform.ty);
         });
-        FMAnimationVerify(self.translateY, ^{
-            endTransform = CGAffineTransformMake(baseTransform.a, baseTransform.b, baseTransform.c, baseTransform.d, baseTransform.tx, self.translateY);
+        FMAnimationVerify(self._translateY, ^{
+            endTransform = CGAffineTransformMake(baseTransform.a, baseTransform.b, baseTransform.c, baseTransform.d, baseTransform.tx, self._translateY);
         });
-        FMAnimationVerify(self.scaleX, ^{
-            endTransform = CGAffineTransformMake(self.scaleX, baseTransform.b, baseTransform.c, baseTransform.d, baseTransform.tx, baseTransform.ty);
+        FMAnimationVerify(self._scaleX, ^{
+            endTransform = CGAffineTransformMake(self._scaleX, baseTransform.b, baseTransform.c, baseTransform.d, baseTransform.tx, baseTransform.ty);
         });
-        FMAnimationVerify(self.scaleY, ^{
-            endTransform = CGAffineTransformMake(baseTransform.a, baseTransform.b, baseTransform.c, self.scaleY, baseTransform.tx, baseTransform.ty);
+        FMAnimationVerify(self._scaleY, ^{
+            endTransform = CGAffineTransformMake(baseTransform.a, baseTransform.b, baseTransform.c, self._scaleY, baseTransform.tx, baseTransform.ty);
         });
-        FMAnimationVerify(self.rotation, ^{
-            endTransform = CGAffineTransformMake(cos(self.rotation), sin(self.rotation), -sin(self.rotation), cos(self.rotation), baseTransform.tx, baseTransform.ty);
+        FMAnimationVerify(self._rotation, ^{
+            endTransform = CGAffineTransformMake(cos(self._rotation), sin(self._rotation), -sin(self._rotation), cos(self._rotation), baseTransform.tx, baseTransform.ty);
         });
     }
     self.endTransform = endTransform;

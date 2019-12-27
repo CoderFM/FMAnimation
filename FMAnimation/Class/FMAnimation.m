@@ -11,7 +11,8 @@
 #import "FMAnimationTransformItem.h"
 #import "FMAnimationFrameItem.h"
 #import "FMAnimationOtherItem.h"
-
+#import "FMAnimationCenterItem.h"
+#import "FMAnimationTransform3DItem.h"
 
 @interface FMAnimation ()
 @property(nonatomic, strong)NSMutableArray<FMAnimationItem *> *animations;
@@ -35,6 +36,19 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     [self.animations removeAllObjects];
 }
 
+- (void)resetBaseProperty{
+    self.baseFrame = self.target.frame;
+    self.baseCenter = self.target.center;
+    self.baseTransform = self.target.transform;
+    self.baseTransform3D = self.target.transform3D;
+}
+
+- (void)dealloc{
+//    [[FMAnimationExecutor shareExecutor] startAnimationWithType:self.groupType animations:self.animations];
+//    [[FMAnimationExecutor shareExecutor] startAnimationWithType:self.groupType animations:self.animations];
+//    [self startAnimation];
+}
+
 - (void)startAnimation
 {
     if (self.groupType == FMAnimationGroupTypeSeries) { //连续的
@@ -43,30 +57,35 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
         for (FMAnimationItem *item in self.animations) {
             item.aniDelay += delay;
             delay = item.aniDuration + item.aniDelay;
-            [item startAniamtion];
+            [item startAnimation];
             if (lastItem == nil) {
                 lastItem = item;
             }
         }
         [self.animations removeAllObjects];
     } else { // 同时的
-        CGAffineTransform lastValue = self.baseTransform;
-        FMAnimationTransformItem *lastItem = nil;
-        for (FMAnimationTransformItem *item in self.animations) {
+        for (FMAnimationItem *item in self.animations) {
             if ([item isKindOfClass:[FMAnimationTransformItem class]]) {
-                if (lastItem == nil) {
-                    [item caculateWithBaseValue:[NSValue valueWithCGAffineTransform:lastValue]];
-                    lastValue = item.endTransform;
-                    lastItem = item;
-                } else {
-                    [item caculateWithBaseValue:[NSValue valueWithCGAffineTransform:lastItem.endTransform]];
-                    lastValue = item.endTransform;
-                    lastItem = item;
-                }
+                [item caculateWithBaseValue:[NSValue valueWithCGAffineTransform:self.baseTransform]];
+                self.baseTransform = ((FMAnimationTransformItem *)item).endTransform;
+            } else if ([item isKindOfClass:[FMAnimationCenterItem class]]) {
+                [item caculateWithBaseValue:[NSValue valueWithCGPoint:self.baseCenter]];
+                self.baseCenter = ((FMAnimationCenterItem *)item).endCenter;
+            } else if ([item isKindOfClass:[FMAnimationFrameItem class]]) {
+                [item caculateWithBaseValue:[NSValue valueWithCGRect:self.baseFrame]];
+                self.baseFrame = ((FMAnimationFrameItem *)item).endFrame;
+            } else if ([item isKindOfClass:[FMAnimationTransform3DItem class]]) {
+                [item caculateWithBaseValue:[NSValue valueWithCATransform3D:self.baseTransform3D]];
+                self.baseTransform3D = ((FMAnimationTransform3DItem *)item).endTransform3D;
+            } else {
+                [item startAnimation];
             }
         }
         [UIView animateWithDuration:1 animations:^{
-            self.target.transform = lastValue;
+            self.target.transform = self.baseTransform;
+            self.target.transform3D = self.baseTransform3D;
+            self.target.frame = self.baseFrame;
+            self.target.center = self.baseCenter;
         }];
     }
 }
@@ -206,7 +225,7 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     return ^(CGFloat x){
         FMAnimationTransformItem *item = [[FMAnimationTransformItem alloc] init];
         item.isAdd = YES;
-        item.translateX = x;
+        item._translateX = x;
         item.next = weakSelf;
         [item set_startBlock:^{
             [weakSelf startAnimation];
@@ -221,7 +240,7 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     return ^(CGFloat y){
         FMAnimationTransformItem *item = [[FMAnimationTransformItem alloc] init];
         item.isAdd = YES;
-        item.translateY = y;
+        item._translateY = y;
         item.next = weakSelf;
         [item set_startBlock:^{
             [weakSelf startAnimation];
@@ -236,7 +255,7 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     return ^(CGFloat x){
         FMAnimationTransformItem *item = [[FMAnimationTransformItem alloc] init];
         item.isAdd = YES;
-        item.scaleX = x;
+        item._scaleX = x;
         item.next = weakSelf;
         [item set_startBlock:^{
             [weakSelf startAnimation];
@@ -251,7 +270,7 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     return ^(CGFloat y){
         FMAnimationTransformItem *item = [[FMAnimationTransformItem alloc] init];
         item.isAdd = YES;
-        item.scaleY = y;
+        item._scaleY = y;
         item.next = weakSelf;
         [item set_startBlock:^{
             [weakSelf startAnimation];
@@ -266,7 +285,7 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     return ^(CGFloat rotation){
         FMAnimationTransformItem *item = [[FMAnimationTransformItem alloc] init];
         item.isAdd = YES;
-        item.rotation = rotation;
+        item._rotation = rotation;
         item.next = weakSelf;
         [item set_startBlock:^{
             [weakSelf startAnimation];
@@ -305,9 +324,9 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     };
 }
 
-- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationShadowModel * _Nonnull))shadow{
+- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationShadow * _Nonnull))shadow{
     WeakSelf;
-    return ^(FMAnimationShadowModel *model){
+    return ^(FMAnimationShadow *model){
         FMAnimationOtherItem *item = [[FMAnimationOtherItem alloc] init];
         item.layerShadow = model;
         item.next = weakSelf;
@@ -319,9 +338,9 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     };
 }
 
-- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationBorderModel * _Nonnull))border{
+- (FMAnimationOtherItem * _Nonnull (^)(FMAnimationBorder * _Nonnull))border{
     WeakSelf;
-    return ^(FMAnimationBorderModel *model){
+    return ^(FMAnimationBorder *model){
         FMAnimationOtherItem *item = [[FMAnimationOtherItem alloc] init];
         item.layerBorder = model;
         item.next = weakSelf;
@@ -338,6 +357,170 @@ FMAnimationItem* FMCreateAnimationItem(NSString *keyPath, id toValue, FMAnimatio
     return ^(CGFloat opaque){
         FMAnimationOtherItem *item = [[FMAnimationOtherItem alloc] init];
         item.viewOpaque = opaque;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveX{
+    WeakSelf;
+    return ^(CGFloat x){
+        FMAnimationCenterItem *item = [[FMAnimationCenterItem alloc] init];
+        item.isAdd = YES;
+        item._centerX = x;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveY{
+    WeakSelf;
+    return ^(CGFloat y){
+        FMAnimationCenterItem *item = [[FMAnimationCenterItem alloc] init];
+        item.isAdd = YES;
+        item._centerY = y;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveToX{
+    WeakSelf;
+    return ^(CGFloat x){
+        FMAnimationCenterItem *item = [[FMAnimationCenterItem alloc] init];
+        item.isAdd = NO;
+        item._centerX = x;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationCenterItem * _Nonnull (^)(CGFloat))moveToY{
+    WeakSelf;
+    return ^(CGFloat y){
+        FMAnimationCenterItem *item = [[FMAnimationCenterItem alloc] init];
+        item.isAdd = NO;
+        item._centerY = y;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+// tranform3D
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat, CGFloat, CGFloat, CGFloat))rotate3D{
+    WeakSelf;
+    return ^(CGFloat roration, CGFloat x, CGFloat y, CGFloat z){
+        FMAnimationTransform3DItem *item = [[FMAnimationTransform3DItem alloc] init];
+        item.isAdd = YES;
+        item._rotation = roration;
+        item._rotationX = x;
+        item._rotationY = y;
+        item._rotationZ = z;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))rotate3DX{
+    WeakSelf;
+    return ^(CGFloat roration){
+        FMAnimationTransform3DItem *item = [[FMAnimationTransform3DItem alloc] init];
+        item.isAdd = YES;
+        item._rotation = roration;
+        item._rotationX = 1;
+        item._rotationY = 0;
+        item._rotationZ = 0;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))rotate3DY{
+    WeakSelf;
+    return ^(CGFloat roration){
+        FMAnimationTransform3DItem *item = [[FMAnimationTransform3DItem alloc] init];
+        item.isAdd = YES;
+        item._rotation = roration;
+        item._rotationX = 0;
+        item._rotationY = 1;
+        item._rotationZ = 0;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))rotate3DZ{
+    WeakSelf;
+    return ^(CGFloat roration){
+        FMAnimationTransform3DItem *item = [[FMAnimationTransform3DItem alloc] init];
+        item.isAdd = YES;
+        item._rotation = roration;
+        item._rotationX = 0;
+        item._rotationY = 0;
+        item._rotationZ = 1;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))scale3DX{
+    WeakSelf;
+    return ^(CGFloat scale){
+        FMAnimationTransform3DItem *item = [[FMAnimationTransform3DItem alloc] init];
+        item.isAdd = YES;
+        item._scaleX = scale;
+        item.next = weakSelf;
+        [item set_startBlock:^{
+            [weakSelf startAnimation];
+        }];
+        [weakSelf.animations addObject:item];
+        return item;
+    };
+}
+
+- (FMAnimationTransform3DItem * _Nonnull (^)(CGFloat))scale3DY{
+    WeakSelf;
+    return ^(CGFloat scale){
+        FMAnimationTransform3DItem *item = [[FMAnimationTransform3DItem alloc] init];
+        item.isAdd = YES;
+        item._scaleY = scale;
         item.next = weakSelf;
         [item set_startBlock:^{
             [weakSelf startAnimation];

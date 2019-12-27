@@ -14,7 +14,9 @@
 #import "FMAnimationTransformItem.h"
 #import "FMAnimationFrameItem.h"
 #import "FMAnimationOtherItem.h"
-#import "FMAnimationShadowModel.h"
-#import "FMAnimationBorderModel.h"
+#import "FMAnimationCenterItem.h"
+#import "FMAnimationTransform3DItem.h"
+#import "FMAnimationShadow.h"
+#import "FMAnimationBorder.h"
 
 #endif /* FMAnimationHeader_h */

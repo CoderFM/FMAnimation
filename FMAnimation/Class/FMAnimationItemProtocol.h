@@ -10,33 +10,48 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FMAnimationFrameItem, FMAnimationTransformItem, FMAnimationOtherItem, FMAnimationBorderModel, FMAnimationShadowModel;
+@class FMAnimationFrameItem, FMAnimationTransformItem, FMAnimationOtherItem, FMAnimationCenterItem, FMAnimationTransform3DItem, FMAnimationBorder, FMAnimationShadow;
 @protocol FMAnimationItemProtocol
 
 // frame
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^addX)(CGFloat x);
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^addY)(CGFloat y);
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^addW)(CGFloat w);
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^addH)(CGFloat h);
+@property(readonly)FMAnimationFrameItem *(^addX)(CGFloat x);
+@property(readonly)FMAnimationFrameItem *(^addY)(CGFloat y);
+@property(readonly)FMAnimationFrameItem *(^addW)(CGFloat w);
+@property(readonly)FMAnimationFrameItem *(^addH)(CGFloat h);
 
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^toX)(CGFloat x);
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^toY)(CGFloat y);
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^toW)(CGFloat w);
-@property(nonatomic, copy, readonly)FMAnimationFrameItem *(^toH)(CGFloat h);
+@property(readonly)FMAnimationFrameItem *(^toX)(CGFloat x);
+@property(readonly)FMAnimationFrameItem *(^toY)(CGFloat y);
+@property(readonly)FMAnimationFrameItem *(^toW)(CGFloat w);
+@property(readonly)FMAnimationFrameItem *(^toH)(CGFloat h);
 
 // transform
-@property(nonatomic, copy, readonly)FMAnimationTransformItem *(^translateX)(CGFloat x);
-@property(nonatomic, copy, readonly)FMAnimationTransformItem *(^translateY)(CGFloat y);
-@property(nonatomic, copy, readonly)FMAnimationTransformItem *(^scaleX)(CGFloat x);
-@property(nonatomic, copy, readonly)FMAnimationTransformItem *(^scaleY)(CGFloat y);
-@property(nonatomic, copy, readonly)FMAnimationTransformItem *(^rotation)(CGFloat rotation);
+@property(readonly)FMAnimationTransformItem *(^translateX)(CGFloat x);
+@property(readonly)FMAnimationTransformItem *(^translateY)(CGFloat y);
+@property(readonly)FMAnimationTransformItem *(^scaleX)(CGFloat x);
+@property(readonly)FMAnimationTransformItem *(^scaleY)(CGFloat y);
+@property(readonly)FMAnimationTransformItem *(^rotation)(CGFloat rotation);
 
 // other
-@property(nonatomic, copy, readonly)FMAnimationOtherItem *(^bgColor)(UIColor *color);
-@property(nonatomic, copy, readonly)FMAnimationOtherItem *(^cornerRadius)(CGFloat radius);
-@property(nonatomic, copy, readonly)FMAnimationOtherItem *(^shadow)(FMAnimationShadowModel *shadow);
-@property(nonatomic, copy, readonly)FMAnimationOtherItem *(^border)(FMAnimationBorderModel *border);
-@property(nonatomic, copy, readonly)FMAnimationOtherItem *(^opaque)(CGFloat opaque);
+@property(readonly)FMAnimationOtherItem *(^bgColor)(UIColor *color);
+@property(readonly)FMAnimationOtherItem *(^cornerRadius)(CGFloat radius);
+@property(readonly)FMAnimationOtherItem *(^shadow)(FMAnimationShadow *shadow);
+@property(readonly)FMAnimationOtherItem *(^border)(FMAnimationBorder *border);
+@property(readonly)FMAnimationOtherItem *(^opaque)(CGFloat opaque);
+
+//center
+@property(readonly)FMAnimationCenterItem *(^moveX)(CGFloat x);
+@property(readonly)FMAnimationCenterItem *(^moveY)(CGFloat y);
+@property(readonly)FMAnimationCenterItem *(^moveToX)(CGFloat x);
+@property(readonly)FMAnimationCenterItem *(^moveToY)(CGFloat y);
+
+//transform3D
+@property(readonly)FMAnimationTransform3DItem *(^rotate3DX)(CGFloat rotation);
+@property(readonly)FMAnimationTransform3DItem *(^rotate3DY)(CGFloat rotation);
+@property(readonly)FMAnimationTransform3DItem *(^rotate3DZ)(CGFloat rotation);
+@property(readonly)FMAnimationTransform3DItem *(^rotate3D)(CGFloat rotation, CGFloat x, CGFloat y, CGFloat z);
+
+@property(readonly)FMAnimationTransform3DItem *(^scale3DX)(CGFloat scale);
+@property(readonly)FMAnimationTransform3DItem *(^scale3DY)(CGFloat scale);
 
 @end
 

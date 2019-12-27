@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)CGPoint baseCenter;
 @property(nonatomic, assign)CGAffineTransform baseTransform;
 @property(nonatomic, assign)CATransform3D baseTransform3D;
-@property(nonatomic, assign)CGFloat baseOpaque;
+
+- (void)resetBaseProperty;
 
 - (void)clearAnimation;
 

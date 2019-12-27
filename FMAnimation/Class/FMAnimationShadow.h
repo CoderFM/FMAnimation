@@ -1,5 +1,5 @@
 //
-//  FMAnimationShadowModel.h
+//  FMAnimationShadow.h
 //  Animation
 //
 //  Created by 郑桂华 on 2019/12/19.
@@ -11,17 +11,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FMAnimationShadowModel : NSObject
+@interface FMAnimationShadow : NSObject
 @property(nonatomic, assign)CGSize shadowOffset;
 @property(nonatomic, strong)UIColor *shadowColor;
 @property(nonatomic, assign)CGFloat shadowOpacity;
 @property(nonatomic, assign)CGFloat shadowRadius;
 @property(nonatomic, strong)UIBezierPath *shadowPath;
 
-+ (instancetype)modelWithColor:(UIColor *)color opacity:(CGFloat)opacity radius:(CGFloat)radius;
++ (instancetype)shadowColor:(UIColor *)color opacity:(CGFloat)opacity radius:(CGFloat)radius;
 
-@property(nonatomic, copy, readonly)FMAnimationShadowModel *(^path)(UIBezierPath *);
-@property(nonatomic, copy, readonly)FMAnimationShadowModel *(^offset)(CGSize);
+@property(nonatomic, copy, readonly)FMAnimationShadow *(^path)(UIBezierPath *);
+@property(nonatomic, copy, readonly)FMAnimationShadow *(^offset)(CGSize);
 @end
 
 NS_ASSUME_NONNULL_END

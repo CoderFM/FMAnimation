@@ -23,7 +23,7 @@
     return self;
 }
 
-- (void)startAniamtion{
+- (void)startAnimation{
     
     [self caculateWithBaseValue:[NSValue valueWithCGRect:self.next.baseFrame]];
     self.next.baseFrame = self.endFrame;

@@ -30,9 +30,10 @@ static CGFloat const FMAnimationDefault = 0.000001;
 
 @property(nonatomic, copy)void(^_startBlock)(void);
 
-- (void)animation:(void(^)(void))animation complete:(void(^)(BOOL finished))complete;
+@property(nonatomic, copy, readonly)FMAnimationItem *(^duration)(NSTimeInterval interval);
+@property(nonatomic, copy, readonly)FMAnimationItem *(^delay)(NSTimeInterval interval);
 
-- (void)startAniamtion;
+- (void)startAnimation;
 
 @end
 

@@ -21,7 +21,7 @@
     return self;
 }
 
-- (void)startAniamtion{
+- (void)startAnimation{
     [UIView animateWithDuration:self.aniDuration delay:self.aniDelay options:UIViewAnimationOptionCurveLinear animations:^{
         FMAnimationVerify(self.layerCornerRadius, ^{
             self.next.target.layer.cornerRadius = self.layerCornerRadius;
@@ -30,8 +30,8 @@
             self.next.target.opaque = self.viewOpaque;
         });
         if (self.layerBorder) {
-            self.next.target.layer.borderWidth = self.layerBorder.borderWidth;
             self.next.target.layer.borderColor = self.layerBorder.borderColor.CGColor;
+            self.next.target.layer.borderWidth = self.layerBorder.borderWidth;
         }
         if (self.layerShadow) {
             self.next.target.layer.shadowColor = self.layerShadow.shadowColor.CGColor;

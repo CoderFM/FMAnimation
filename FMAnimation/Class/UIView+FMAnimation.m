@@ -15,22 +15,14 @@ static void *FMAnimationUIViewAnimatorKey = &FMAnimationUIViewAnimatorKey;
 
 - (FMAnimation *)animator{
     
-    FMAnimation *anim = objc_getAssociatedObject(self, FMAnimationUIViewAnimatorKey);
-    if (!anim) {
-        anim = [[FMAnimation alloc] init];
-        anim.target = self;
-        objc_setAssociatedObject(self, FMAnimationUIViewAnimatorKey, anim, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
+    FMAnimation *anim= [[FMAnimation alloc] init];
+    anim.target = self;
     
     anim.baseFrame = self.frame;
     anim.baseCenter = self.center;
-    anim.baseOpaque = self.opaque;
     anim.baseTransform = self.transform;
-    
-    
-    
-    [anim clearAnimation];
-    
+    anim.baseTransform3D = self.transform3D;
+
     return anim;
 }
 

@@ -16,4 +16,7 @@ typedef NS_ENUM(NSUInteger, FMAnimationGroupType) {//动画同时该怎么做
     FMAnimationGroupTypeConcurrent,// 同时
 };
 
+static NSTimeInterval const FMAnimationDefaultDuration = 1;// 秒
+static NSTimeInterval const FMAnimationDefaultDelay = 0;//
+
 #endif /* FMAnimationConstant_h */
