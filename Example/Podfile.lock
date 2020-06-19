@@ -1,0 +1,16 @@
+PODS:
+  - FMAnimation (0.1.0)
+
+DEPENDENCIES:
+  - FMAnimation (from `../`)
+
+EXTERNAL SOURCES:
+  FMAnimation:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FMAnimation: 488a9e450dbd2ae3b87f76cfa6431fe0acd69351
+
+PODFILE CHECKSUM: fed7f68a30b4e26e1ead3d58c96827b326ae6315
+
+COCOAPODS: 1.9.2
